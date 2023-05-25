@@ -67,9 +67,7 @@ class FlutterDeepSpeech {
       'scorerName': scorerName,
     };
 
-    return _modelLoaded =
-        await _methodChannel.invokeMethod<bool>('loadModelFromName', params) ??
-            false;
+    return _modelLoaded = await _methodChannel.invokeMethod<bool>('loadModelFromName', params) ?? false;
   }
 
   /// Request for the microphone permission.
@@ -77,8 +75,7 @@ class FlutterDeepSpeech {
   /// Returns true if the permission was granted.
   /// Returns false otherwise.
   Future<bool> requestMicPermission() async {
-    return _hasMicPermission =
-        await _methodChannel.invokeMethod('requestMicPermission');
+    return _hasMicPermission = await _methodChannel.invokeMethod('requestMicPermission');
   }
 
   /// Start listening to the audio stream.
@@ -105,11 +102,7 @@ class FlutterDeepSpeech {
       }
     }
 
-    _listenEventSub = _listenEventChannel
-        .receiveBroadcastStream()
-        .distinct()
-        .map(_parseResult)
-        .listen(
+    _listenEventSub = _listenEventChannel.receiveBroadcastStream().distinct().map(_parseResult).listen(
       onResult,
       onDone: stop,
       onError: (error, stackTrace) {
@@ -138,6 +131,11 @@ class FlutterDeepSpeech {
     _isListening = false;
     _listenEventSub?.cancel();
     await _methodChannel.invokeMethod('stop');
+  }
+
+  Future<void> freeModel() {
+    _modelLoaded = false;
+    return _methodChannel.invokeMethod('freeModel');
   }
 
   /// Free the models and resources.

@@ -87,9 +87,11 @@ class FlutterDeepSpeechPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
 
                 deepSpeechService.loadModelFromName(modelName, scorerName)
             }
+
             "requestMicPermission" -> permissionsHandler.requestMicPermission(result)
             "listen" -> deepSpeechService.listen()
             "stop" -> deepSpeechService.stop()
+            "freeModel" -> deepSpeechService.freeModel()
             "dispose" -> deepSpeechService.dispose()
             else -> result.notImplemented()
         }

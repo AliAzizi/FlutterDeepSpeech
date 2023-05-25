@@ -67,6 +67,10 @@ class DeepSpeechService {
         isRecording.set(false)
     }
 
+    fun freeModel() {
+        model.freeModel()
+    }
+
     fun dispose() {
         model.freeModel()
         context = null
