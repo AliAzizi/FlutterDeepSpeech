@@ -68,7 +68,9 @@ class DeepSpeechService {
     }
 
     fun freeModel() {
+        logError("should free model")
         model.freeModel()
+        logError("Done!")
     }
 
     fun dispose() {
