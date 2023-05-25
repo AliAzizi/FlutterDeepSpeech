@@ -60,8 +60,6 @@ class FlutterDeepSpeech {
     required String modelName,
     required String scorerName,
   }) async {
-    if (_modelLoaded) return true;
-
     final params = {
       'modelName': modelName,
       'scorerName': scorerName,
