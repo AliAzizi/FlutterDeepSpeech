@@ -133,7 +133,9 @@ class FlutterDeepSpeech {
     await _methodChannel.invokeMethod('stop');
   }
 
-  Future<void> freeModel() {
+  Future<void> freeModel() async {
+    if (!_modelLoaded) return;
+
     _modelLoaded = false;
     return _methodChannel.invokeMethod('freeModel');
   }
